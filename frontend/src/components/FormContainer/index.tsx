@@ -2,8 +2,6 @@ type Props = {
     title: string
     children: JSX.Element,
 };
-import dotenv from 'dotenv';
-dotenv.config();
 
 const FormContainer: React.FC<Props> = ({ children, title }: Props): JSX.Element => {
     return (
