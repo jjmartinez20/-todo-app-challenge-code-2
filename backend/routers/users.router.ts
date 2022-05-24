@@ -1,15 +1,17 @@
 import { Router } from 'express';
 import UsersController from '../controllers/users.controller';
+import basicAuth from '../services/basicAuth.service';
 
-const router: Router = Router();
+export const usersRouterProtected: Router = Router();
+export const usersRouterPublic: Router = Router();
 const usersController: UsersController = new UsersController();
 
-router.get('/', usersController.findAll);
-router.get('/:id', usersController.findById);
-router.put('/:id', usersController.updateUser);
-router.put('/changepassword/:id', usersController.updatePassword);
-router.delete('/:id', usersController.deleteUser);
-router.post('/', usersController.createUser);
-router.post('/login', usersController.Login);
+usersRouterProtected.use(basicAuth);
+usersRouterProtected.get('/', usersController.findAll);
+usersRouterProtected.get('/:id', usersController.findById);
+usersRouterProtected.put('/:id', usersController.updateUser);
+usersRouterProtected.put('/changepassword/:id', usersController.updatePassword);
+usersRouterProtected.delete('/:id', usersController.deleteUser);
 
-export default router;
+usersRouterPublic.post('/', usersController.createUser);
+usersRouterPublic.post('/login', usersController.Login);
