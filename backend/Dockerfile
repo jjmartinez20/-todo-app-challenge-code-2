@@ -8,6 +8,6 @@ COPY package-lock.json /usr/app/backend
 COPY . /usr/app/backend
 
 RUN npm install
-
+RUN npm run build
 EXPOSE 8001
-CMD npm run dev
+CMD npm run start
